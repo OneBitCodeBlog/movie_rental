@@ -1,10 +1,11 @@
 class RentalsController < ApplicationController
   before_action :set_rental, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_rental, only: [:show, :edit, :update, :destroy]
 
   # GET /rentals
   # GET /rentals.json
   def index
-    @rentals = Rental.all
+    @rentals = policy_scope(Rental).all
   end
 
   # GET /rentals/1
@@ -62,6 +63,10 @@ class RentalsController < ApplicationController
   end
 
   private
+    def authorize_rental
+      authorize @rental
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_rental
       @rental = Rental.find(params[:id])
