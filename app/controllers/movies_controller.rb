@@ -5,7 +5,6 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    authorize Movie
     @movies = Movie.all
   end
 
