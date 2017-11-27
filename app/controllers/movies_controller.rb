@@ -1,9 +1,11 @@
 class MoviesController < ApplicationController
+  before_action :authorize_movie
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   # GET /movies
   # GET /movies.json
   def index
+    authorize Movie
     @movies = Movie.all
   end
 
@@ -62,6 +64,11 @@ class MoviesController < ApplicationController
   end
 
   private
+
+    def authorize_movie
+      authorize Movie
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])
