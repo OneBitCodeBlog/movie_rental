@@ -9,11 +9,13 @@
   </head>
 
   <body>
-    <% if policy(Movie).index? %>
-      <%= link_to "Movies", movies_path %>
-    <% end %>
-    <%= link_to "Rental", rentals_path %>
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% if user_signed_in? %>
+      <% if policy(Movie).index? %>
+        <%= link_to "Movies", movies_path %>
+      <% end %>
+      <%= link_to "Rental", rentals_path %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% end %>  
     <%= yield %>
   </body>
 </html>
